@@ -1,0 +1,352 @@
+### Brought to you by Asphyxia/Dimitri (The same person)
+
+
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+
+
+  - Full Carding Guide
+  - Includes Encryption, Vpn 
+  - By Asphyxia
+
+# HDD Encryption!
+
+ - This carding laptop should only be used for carding purposes, never log in with real profiles like Facebook, Instagram etc.
+
+It is advisable to have an extra laptop or computer for the carding scene, personal data should be backed up separately from illegal data. Different PC, different hard drives etc. This is advisable not only because of the cops, but also if you are infected by someone. So the person who wants to harm you has only your carding data, but not your photos, address, logins etc. So you are only slightly blackmailable, which I hope will not happen.
+
+Encrypt Hard Disk?
+
+After you have installed an operating system of your choice, it is essential to encrypt the laptop.
+
+Encryption is the life insurance of every criminal. It makes it much more difficult for the authorities to investigate you, even during a house search, or even makes it impossible in the best case.
+
+Recommended is a password with a length of 30 characters, but usually you can say that the longer it is, the more difficult it will be to crack your encryption.
+
+There is often a discussion about which tool to use for encryption. Since Veracrypt has proven itself and this should still be secure, it is advisable to use this too.
+
+You can download VeraCrypt from here:
+
+https://www.veracrypt.fr/en/Downloads.html
+Since we want to lock our system, an installation on our operating system is necessary. You can find instructions for a full encryption here:
+
+https://www.howtogeek.com/howto/6169/use-truecrypt-to-secure-your-data/
+### VPN/Browser/System Encryption (This is a long one)
+
+ - Basic requirements to start safely at all is a VPN membership with one of the known VPN providers. The monthly price is now only about 12 Euro per month.
+
+This has everyone somehow left. 12 Euro is not the world, but our security is! Most people swear by Perfect Privacy (PP since 2008) because this provider does not log according to their own statements, which is supported by the fact that there are no known cases of a bus at PP that can be attributed to the failure of the VPN provider.
+
+Another interesting fact:
+
+At Perfect Privacy the servers run via RAM disks and not via hard disks. Overall, PP also convinces with its always open communication with customers in the website Internal Forum.
+
+You can find PP's website here: https://perfect-privacy.com
+
+Install the client of Perfect Privacy on your computer.
+
+Once you have done that, you have to test if the DNS leak protection of Perfect Privacy works. You can do this directly on the Perfect Privacy page or here:
+
+https://www.dnsleaktest.com/
+
+All About VPNs
+Configure browser?
+
+The next step is to install the Firefox browser.
+
+Firefox:
+https://www.mozilla.org/de/firefox/new/
+
+It is usually useful to download directly from the manufacturer's site.
+
+After you have installed Firefox, go to the search line above and enter "about:config". There you change the following parameters.
+
+The Manual Explanation:
+
+If you want to surf safely and anonymously with the Firefox browser, you should change something in the Config.
+
+To understand what you are doing, you should read the whole text.
+
+To open the Config, please enter "about:config" and press enter. After that just search for the commands and change them.
+
+
+Disable Geolocation API ???
+
+With the help of the Geolocation API the geographical position of the surfer can be determined relatively precisely. Depending on the existing hardware in the computer, the WiFis in the vicinity can be used or GPS hardware can be used to determine the location.
+
+In the worst case, the location can only be determined by the IP address. The API is used with Javascript. Current Firefox versions ask before access to the Geolocation API is allowed.
+
+Nevertheless I have a better feeling if you disable it completely. For this you have to set the following variable under "about:config":
+
+Code:
+? geo.enabled false
+? geo.wifi.uri (empty string)
+? browser.search.geoip.timeout 1
+This setting is important if you hide your IP address with anonymization services or VPNs.
+
+Disable WebGL ???
+
+WebGL provides a Javascript API for rendering 3D objects. It can be used for fingerprinting the performance of graphics hardware and OpenGL implementation, such as the Perfect Pixel study:
+
+Fingerprinting Canvas in HTML5 shows Fingerprinting via WebGL can be prevented with the following settings:
+Code:
+? webgl.disable-extensions true
+? webgl.min_capability_mode true
+? webgl.disable-fail-if-major-performance-caveat true
+In addition, WebGL is an (unnecessary) security risk because it allows attacks on the operating system.
+
+By reloading fonts, bugs in the font rendering libraries can be exploited. This was the case for Linux (CVE-2010-3855), Windows (ms11-087) or OpenBSD (CVE-2013-6462).
+
+The WebGL shader engines also have occasional bugs, such as MFSA 2016-53, so we recommend disabling WebGL completely to reduce the risk:
+
+Code:
+? webgl.disabled = true
+
+Disable WebRTC ??
+?
+WebRTC is a technology that enables direct telephony and video chats between surfers in the browser.
+
+Currently there are few useful applications for this technology and I would prefer a specialized program like Jitsi.
+
+If you want to try it out, you can watch Palava.tv or browser meeting. With WebRTC you can find out the local IP address of the computer in the LAN and the public IP address, as a demonstration by D. Roesler shows.
+
+Even VPN connections can be tricked with it. Furthermore, the presence of a camera and microphone can be used as a feature in the browser fingerprint.
+
+In Firefox, WebRTC can be deactivated under "about:config":
+
+Code:
+? media.peerconnection.enabled = false
+? loop.enabled = false
+? loop.facebook.enabled = false
+
+Disable Timing APIs ???
+
+The highly accurate timing APIs can be misused by web applications to analyze resource loading or user behavior (Timing Attacks on Web Privacy, PDF). If you use your browser to read websites and not primarily for games, you should disable the APIs:
+
+Code:
+? dom.enable_resource_timing = false
+? dom.enable_user_timing = false
+? dom.enable_performance = false
+Disable clipboard events ???
+
+With clipboard events, Firefox informs a web page that the surfer has copied a section to the clipboard or pasted the clipboard contents into a form field.
+
+The events oncopy, oncut and onpaste are triggered to which the web page could react. You can deactivate these events under "about:config":
+
+Code:
+? dom.event.clipboardevents.enabled = false
+Except for Google Docs and similar Javascript-heavy GUIs for document processing in the cloud, I don't know of any useful application of this feature.
+
+Speculative loading of websites ???
+
+Firefox starts loading web pages in some situations when the mouse pointer is over a link, before you actually click.
+
+This should speed up the loading of web pages by a few milliseconds. If you want to avoid connections with unwanted web servers, you can disable this feature under "about:config":
+
+Code:
+? network.http.speculative-parallel-limit = 0
+Deactivate WebIDE ???
+
+TorProject.org recommends for Firefox 38.0 to disable the WebIDE under "about:config" for security reasons:
+
+Code:
+? devtools.webide.enabled = false
+? devtools.webide.autoinstallADBHelper = false
+? devtools.webide.autoinstallFxdtAdapters = false
+I don't like it if someone could remotely deactivate or disable anything on my computer. Under "about:config" you can disable this feature:
+
+Code:
+? extensions.blocklist.enabled = false
+Disable metadata update for add-ons ???
+
+Since Firefox 4.0, the browser contacts the AMO server of Mozilla daily and sends an exact list of installed add-ons and the time Firefox needs to start. In response, the server sends status updates for the installed add-ons.
+
+This feature is independent of the update check for add-ons, it is just an additional data collection from Mozilla. Under "about:config" you can disable this function:
+
+Code:
+? extensions.getAddons.cache.enabled = false
+Disable HTML5 beacons ???
+
+Beacons allow a browser to send data collected via Javascript to the web server for analysis when leaving/closing a website.
+
+I can't think of a useful application outside of "analysis of the surfing behavior" (aka tracking). Under "about:config" you can disable this feature:
+
+Code:
+? beacon.enabled = false
+Disable Safebrowsing ???
+
+Starting with Firefox 34, it is no longer sufficient to disable the use of Google's Safebrowsing database in the settings dialog. Additionally you have to disable the download of the database under "about:config" if you don't want to connect to Google.
+
+Code:
+? browser.safebrowsing.enabled false (until Firefox 49)
+? browser.safebrowsing.phishing.enabled false (from Firefox 50)
+? browser.safebrowsing.malware.enabled false
+? browser.safebrowsing.blockedURIs.enabled false
+? browser.safebrowsing.downloads.enabled false
+? browser.safebrowsing.downloads.remote.enabled false
+? browser.safebrowsing.updateURL (empty string)
+? browser.safebrowsing.appRepURL (empty string, up to FF 45)
+? browser.safebrowsing.downloads.remote.url (empty string, from FF 46)
+Against phishing attacks no technical measures protect completely but primarily the own behaviour.
+
+And against malware, regular updates of the system protect better than virus scanners and URL lists.
+
+Deactivate Health Report ??????
+
+The health report is sent to Mozilla, you can deactivate it under "about:config":
+
+Code:
+? datareporting.healthreport.service.enabled = false
+? datareporting.healthreport.uploadEnabled = false
+? datareporting.policy.dataSubmissionEnabled = false
+
+Disable Heartbeat User Rating ???
+
+With Firefox 37.0 Mozilla introduced the heartbeat user rating system. The user should rate Firefox and is occasionally invited to participate in the community.
+
+Mozilla itself has recognized that this feature could be annoying:
+
+We understand that any interruption of your time on the internet can be annoying.
+Under "about:config" you can disable the feature by setting the following URL to an empty string:
+
+Code:
+? browser.selfsupport.url = ""
+Disable Wi-Fi Hotspot portal detection ???
+
+Firefox 52 detects the portal pages of Wi-Fi hotspots and opens them in a new tab (Release Notes).
+
+For Wi-Fi Hotspot portal detection, Firefox contacts the following web page everytime it is launched:
+
+https://portaldetection.com
+
+Under about:config you can get Firefox to stop this behavior by disabling portal detection (you will hardly miss it):
+
+Code:
+? network.captive-portal-service.enabled = false
+Disable Microsoft Family Safety ?? ?
+
+Microsoft Family Safety is a local man-in-the-middle proxy in Windows 10 that can control access rights to web pages and is therefore by definition a censorship tool.
+
+Starting with Firefox 52, the use of Microsoft Family Safety is enabled by default. With the following option you can disable the use of Microsoft Family Safety under "about:config":
+
+Code:
+?security.family_safety.mode = 0
+Change Hardware ID?
+
+The hardware ID can be read by programs under certain circumstances, in the worst case it can be used in a comparison against you.
+
+Therefore it is recommended to change it as well. For this there is this tool:
+
+https://sourceforge.net/projects/hwid-changer/
+
+The tool is self-explanatory and very easy to use. You start the program, generate a new hardware ID and press the "Change HWID-Button".
+
+After the reboot the new hardware ID should be set. Whether the changes have become active.
+
+Go to start in Windows and type "regedit" and confirm as admin.
+
+A window will open. Now you have to follow the following path to get the correct file:
+
+Code:
+? Computer - Hkey_Local_Machine - System - CurrentControlset - Control - ID Config DB - Hardware Profiles - 0001
+There you will find a file called "HW Profile Guid". On the right side there is a value.
+
+Change the last 4 digits of the value.
+
+Disable the microphone and camera of the notebook ?
+
+Yeah, I admit it may sound paranoid. But, if you study the RATs a little bit, you might understand.
+
+If someone infects you, they may have complete access to your computer once it's connected to the Internet.
+
+This may include access to microphones and cameras. If this is the case, the attacker can theoretically take pictures of you at any time, but he can also activate your microphone.
+
+This is also possible via your smartphone. As long as you don't need the microphone, I recommend to deactivate it in the device manager.
+
+With the camera I am one step more radical. Not only do I deactivate it, but I also uninstall the drivers for it. Additionally I have taped my camera.
+
+In the device manager go to "Image Processing or Imaging Device" and uninstall your camera.
+
+Activate Bluescreen of Death with a key combination?
+
+It is a key combination that you can use to crash your PC and thus re-encrypt your PC. If for some reason the state authorities should access your data, you can protect it from the state.
+
+Those who use a stationary PC can use it in case of an uninvited spontaneous visit to the Blue-Man-Group(Cops) simply switch off immediately via a multiple socket with switch, so that the
+hopefully encrypted system is immediately encrypted again.
+
+For those who use a notebook, however, working without a battery is not the real thing and if you are using of a case the notebook must have switched off immediately, a task force can quickly run to Laptop and keep this "open."
+
+In this case, it is possible on Windows systems to trigger a blue screen of death at the touch of a key, which immediately crashes the system, thus arming the encryption.
+
+To do this, you only have to enter the following registry key with a currently patched computer and enter a DWORD value:
+
+Go to the registry path
+Code:
+ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\kbdhid\Parameters
+Enter a new key as DWORD "CrashOnCtrlScroll" (without quotation marks!!!)
+Enter the value "1" to the newly created key and restart the computer.
+After the restart you only have to press the following key combination in case of emergency:
+
+? Keep the right "Ctrl" key pressed and press the "Scroll" key twice. If you don't know where they key on keyboard is, just google for it.
+
+? If you have cleaned up all this, you may be happy about a Bluescreen of Death for the first time
+
+
+
+### VM (extra protection)
+
+Setting up the virtual machine?
+
+Virtual machines are needed to run scene tools without running your system, but also to card, for example.
+
+If you want to stay in the scene for a longer time, you can't do without a VM. Install VM Workstation or VirtualBox (free) Which variant you choose is up to you, since the products do not differ noticeably in quality.
+
+Download VirtualBox:
+
+https://www.virtualbox.org/
+
+For the VB, it's best to use Windows 8 or 10.
+To install the VB, you need a .iso image of the selected OS.
+
+You can find it here:
+https://www.microsoft.com/software-download/windows10
+
+Create VB (illustrated on VMware):
+
+Create a VM
+http://prntscr.com/ll2p18
+
+Select configuration
+http://prntscr.com/ll2pdj
+
+Determine ISO file location, where Windows is located
+http://prntscr.com/ll2phy
+
+Determine version
+http://prntscr.com/ll2plv
+
+Name VM
+http://prntscr.com/ll2pqn
+
+Allocate disk space
+http://prntscr.com/ll2pv3
+
+Adjust VM
+http://prntscr.com/ll2pza
+
+Working memory, allocate RAM
+http://prntscr.com/ll2q39
+
+And finally, start the VM and let the operating system be installed like a normal installation. VMware has the EasyInstaller function for Windows and ubuntu, so that they install themselves more or less independently on the VM.
+
+
+
+
+
+### Summary
+
+So yes this was very long but it beats being in prison cause you werent safe 
+
+### Brought to you by Asphyxia/Dimitri (The same person)
+
